@@ -3,6 +3,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+# Исключение для отчёта Allure
+!target/site/allure-maven-plugin/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -12,7 +14,8 @@ target/
 *.iws
 *.iml
 *.ipr
-.idea/project.xml
+.idea/project.xml'
+.idea
 
 
 ### Eclipse ###
@@ -39,3 +42,22 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Allure ###
+allure-results/
+allure-report/
+.allure/
+
+### Selenium drivers ###
+chromedriver.exe
+geckodriver.exe
+yandexdriver.exe
+
+### Additional IDE files ###
+encodings.xml
+misc.xml
+vcs.xml
+dictionaries/
+
+### OS ###
+Thumbs.db
