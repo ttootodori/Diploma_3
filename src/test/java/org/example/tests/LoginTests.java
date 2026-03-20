@@ -1,6 +1,7 @@
 package org.example.tests;
 
-import io.restassured.response.Response;
+import org.example.pages.PasswordRecoveryPage;
+import org.example.pages.PasswordRecoveryPage.*;
 import org.example.RestApi;
 import org.example.model.User;
 import org.example.steps.UserSteps;
@@ -67,10 +68,10 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginByClickingButtonInPasswordRecoveryForm() {
-
+        PasswordRecoveryPage recoveryPage = new PasswordRecoveryPage(driver);
         mainPage.clickLoginButton();
         loginPage.clickForgotPasswordLink();
-        loginPage.clickOnRecoveryPageLoginLink();
+        recoveryPage.clickOnRecoveryPageLoginLink();
         loginPage.login(user.getEmail(),user.getPassword());
         assertTrue(mainPage.isBurgerConstructorDisplayed());
 
