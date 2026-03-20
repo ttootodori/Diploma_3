@@ -1,12 +1,7 @@
 package org.example.tests;
 
 import org.example.model.User;
-import org.example.pages.RegisterPage;
-import org.example.pages.LoginPage;
-import org.example.pages.MainPage;
-import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.*;
 
@@ -17,11 +12,23 @@ public class RegistrationTest extends BaseTest {
 
         User user = User.getRandom();
 
-        driver.get("https://stellarburgers.education-services.ru/register");
-        RegisterPage registerPage = new RegisterPage(driver);
-        registerPage.register(user.getName(), user.getEmail(), user.getPassword());
+        mainPage.clickLoginButton();
+        loginPage.clickRegisterLink();
+        registrationPage.register(user.getName(), user.getEmail(), user.getPassword());
         Thread.sleep(2000);
         assertTrue(driver.getCurrentUrl().contains("login"));
+
+    }
+
+    @Test
+    public void testNotSuccessfulRegistration() {
+
+        User user = User.getRandom();
+
+        mainPage.clickLoginButton();
+        loginPage.clickRegisterLink();
+        registrationPage.register(user.getName(), user.getEmail(), "12345");
+        assertTrue(registrationPage.isErrorMessageDisplayed());
 
     }
 

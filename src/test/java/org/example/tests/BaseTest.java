@@ -1,6 +1,9 @@
 package org.example.tests;
 
 import org.example.client.UserClient;
+import org.example.model.User;
+import org.example.pages.LoginPage;
+import org.example.pages.RegistrationPage;
 import org.example.steps.UserSteps;
 import org.example.pages.MainPage;
 import org.junit.After;
@@ -20,6 +23,9 @@ public class BaseTest {
 
     protected WebDriver driver;
     protected MainPage mainPage;
+    protected RegistrationPage registrationPage;
+    protected LoginPage loginPage;
+    protected User user;
     protected UserSteps userSteps;
     protected UserClient userClient;
     protected String accessToken;
@@ -27,7 +33,7 @@ public class BaseTest {
     protected static final String BASE_URL = "https://stellarburgers.education-services.ru/";
 
     @Before
-    public void startUp() {
+    public void setUp() throws InterruptedException {
         // Получаем браузер из системной переменной (по умолчанию chrome)
         String browser = System.getProperty("browser", "chrome");
 
@@ -44,6 +50,8 @@ public class BaseTest {
 
         // Инициализация Page Objects
         mainPage = new MainPage(driver);
+        registrationPage = new RegistrationPage(driver);
+        loginPage = new LoginPage(driver);
 
         // API клиенты
         userSteps = new UserSteps();
@@ -70,10 +78,10 @@ public class BaseTest {
 
     private void startBrowserYandex() {
         // Яндекс использует Chromium, но нужно указать путь к браузеру
-        WebDriverManager.chromedriver().setup();
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Xander\\Diploma\\Diploma_3\\src\\test\\resources\\drivers");
 
         ChromeOptions options = new ChromeOptions();
-        options.setBinary("C:/Users/Xander/AppData/Local/Yandex/YandexBrowser/Application/browser.exe");
+        options.setBinary("C:\\Program Files (x86)\\Yandex\\YandexBrowser\\Application\\browser.exe");
 
         driver = new ChromeDriver(options);
     }

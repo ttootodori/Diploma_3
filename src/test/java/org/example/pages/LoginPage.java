@@ -29,6 +29,9 @@ public class LoginPage {
     @FindBy(xpath = "//a[contains(@href, 'forgot-password')]")
     private WebElement forgotPasswordLink;
 
+    @FindBy(xpath = "//a[@href='/login']")
+    private WebElement recoveryPageLoginLink;
+
     // Методы для ввода данных
     public void setEmail(String email) {
         emailInput.sendKeys(email);
@@ -64,8 +67,8 @@ public class LoginPage {
         forgotPasswordLink.click();
     }
 
-    // Твой универсальный метод оставил, если нужен
-    public void clickOnElement(WebElement element) {
-        element.click();
+    public void clickOnRecoveryPageLoginLink() {
+        recoveryPageLoginLink.click();
     }
+
 }

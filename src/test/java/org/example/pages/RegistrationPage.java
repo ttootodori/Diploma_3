@@ -1,15 +1,16 @@
 package org.example.pages;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegisterPage {
+public class RegistrationPage {
 
     private WebDriver driver;
 
-    public RegisterPage(WebDriver driver) {
+    public RegistrationPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -27,7 +28,18 @@ public class RegisterPage {
     private WebElement registerButton;
 
     @FindBy(xpath = "//a[@href='/login']")
-    private WebElement loginLink;  // переименовал, чтобы не путать с кнопкой входа
+    private WebElement loginLink;
+
+    @FindBy(xpath = "//p[contains(@class, 'input__error')]")
+    private WebElement errorMessage;
+
+    public boolean isErrorMessageDisplayed() {
+        try {
+            return errorMessage.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
 
     // Методы для заполнения полей
     public void setName(String name) {

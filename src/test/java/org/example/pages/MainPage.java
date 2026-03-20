@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,6 +30,9 @@ public class MainPage {
 
     @FindBy(xpath = "//div[contains(@class, 'tab_tab') and .//span[text()='Начинки']]")
     private WebElement fillingsTab;
+
+    @FindBy(xpath = "//h1[text()='Соберите бургер']")
+    private WebElement burgerConstructorTitle;
 
     // Методы для кликов
     public void clickLoginButton() {
@@ -62,6 +66,14 @@ public class MainPage {
 
     public boolean isFillingsTabSelected() {
         return isTabSelected(fillingsTab);
+    }
+
+    public boolean isBurgerConstructorDisplayed() {
+        try {
+            return burgerConstructorTitle.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
     }
 
     // Приватный вспомогательный метод
