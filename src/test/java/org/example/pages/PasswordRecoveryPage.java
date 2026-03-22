@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,8 +18,8 @@ public class PasswordRecoveryPage {
     @FindBy(xpath = "//a[@href='/login']")
     private WebElement recoveryPageLoginLink;
 
+    @Step("Нажатие кнопки Войти на странице восстановления пароля")
     public void clickOnRecoveryPageLoginLink() {
         recoveryPageLoginLink.click();
     }
-
 }

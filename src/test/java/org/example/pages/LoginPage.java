@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,40 +30,40 @@ public class LoginPage {
     @FindBy(xpath = "//a[contains(@href, 'forgot-password')]")
     private WebElement forgotPasswordLink;
 
-    // Методы для ввода данных
+    @Step("Ввод email")
     public void setEmail(String email) {
         emailInput.sendKeys(email);
     }
 
+    @Step("Ввод пароля")
     public void setPassword(String password) {
         passwordInput.sendKeys(password);
     }
 
-    // Метод для заполнения обоих полей
+    @Step("Заполнение формы логина")
     public void fillLoginForm(String email, String password) {
         setEmail(email);
         setPassword(password);
     }
 
-    // Метод для клика по кнопке входа
+    @Step("Нажатие кнопки Войти")
     public void clickLoginButton() {
         loginButton.click();
     }
 
-    // Метод для полного действия логина
+    @Step("Выполнение входа в систему")
     public void login(String email, String password) {
         fillLoginForm(email, password);
         clickLoginButton();
     }
 
-    // Методы для перехода по ссылкам
+    @Step("Переход на страницу регистрации")
     public void clickRegisterLink() {
         registerLink.click();
     }
 
+    @Step("Переход на страницу восстановления пароля")
     public void clickForgotPasswordLink() {
         forgotPasswordLink.click();
     }
-
-
 }

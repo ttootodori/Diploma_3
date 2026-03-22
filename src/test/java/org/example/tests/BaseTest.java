@@ -8,16 +8,13 @@ import org.example.steps.UserSteps;
 import org.example.pages.MainPage;
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
@@ -46,7 +43,7 @@ public class BaseTest {
         // Настройки драйвера
         driver.manage().window().maximize();
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
         // Инициализация Page Objects
         mainPage = new MainPage(driver);
@@ -86,11 +83,9 @@ public class BaseTest {
         driver = new ChromeDriver(options);
     }
 
-    protected void waitForPageLoad() {
-        new WebDriverWait(driver, Duration.ofSeconds(30)).until(
-                d -> ((JavascriptExecutor) d)
-                        .executeScript("return document.readyState").equals("complete")
-        );
+    protected void waitForUrlChange() {
+        String currentUrl = driver.getCurrentUrl();
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(webDriver -> !webDriver.getCurrentUrl().equals(currentUrl));
     }
-
 }

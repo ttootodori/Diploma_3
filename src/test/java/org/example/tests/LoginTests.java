@@ -1,12 +1,11 @@
 package org.example.tests;
 
+import io.qameta.allure.Description;
 import org.example.pages.PasswordRecoveryPage;
-import org.example.pages.PasswordRecoveryPage.*;
 import org.example.RestApi;
 import org.example.model.User;
 import org.example.steps.UserSteps;
 import io.restassured.RestAssured;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +14,6 @@ import static org.junit.Assert.assertTrue;
 public class LoginTests extends BaseTest {
 
     private User user;
-    private String accessToken;
     private UserSteps userSteps;
 
     @Before
@@ -31,15 +29,8 @@ public class LoginTests extends BaseTest {
         accessToken = userSteps.getAccessToken();
     }
 
-    @After
-    public void cleanUp() {
-        if (accessToken != null) {
-            userSteps.deleteUser(accessToken);
-            System.out.println("Успешно удалён.");
-        }
-    }
-
     @Test
+    @Description("Вход через кнопку Войти в аккаунт на главной странице.")
     public void loginByClickingLoginButton() {
         mainPage.clickLoginButton();
         loginPage.login(user.getEmail(), user.getPassword());
@@ -48,6 +39,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
+    @Description("Вход через кнопку Личный кабинет в шапке сайта.")
     public void loginByClickingAccountButton() {
 
         mainPage.clickPersonalAccount();
@@ -57,6 +49,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
+    @Description("Вход через кнопку Войти в форме регистрации.")
     public void loginByClickingButtonInRegistrationForm() {
 
         mainPage.clickLoginButton();
@@ -67,6 +60,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
+    @Description("Вход через кнопку Войти в форме восстановления пароля.")
     public void loginByClickingButtonInPasswordRecoveryForm() {
         PasswordRecoveryPage recoveryPage = new PasswordRecoveryPage(driver);
         mainPage.clickLoginButton();
@@ -76,5 +70,4 @@ public class LoginTests extends BaseTest {
         assertTrue(mainPage.isBurgerConstructorDisplayed());
 
     }
-
 }
