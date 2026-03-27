@@ -12,6 +12,9 @@ target/
 *.iws
 *.iml
 *.ipr
+.idea/project.xml'
+.idea
+
 
 ### Eclipse ###
 .apt_generated
@@ -37,3 +40,21 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Allure ###
+allure-report/
+.allure/
+
+### Selenium drivers ###
+chromedriver.exe
+geckodriver.exe
+yandexdriver.exe
+
+### Additional IDE files ###
+encodings.xml
+misc.xml
+vcs.xml
+dictionaries/
+
+### OS ###
+Thumbs.db
